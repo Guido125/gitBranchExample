@@ -1,8 +1,10 @@
 #import things
 
-
+sayHi() {
+	print "Hello World!";
+}
 
 main() {
-	print "Hello World!";
+	sayHi();
 }
 
