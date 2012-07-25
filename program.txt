@@ -3,6 +3,7 @@
 
 
 main() {
+	bug fix #1
 	print "Hello World!";
 }
 
