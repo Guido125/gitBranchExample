@@ -4,6 +4,7 @@
 
 sayHi() {
 	print "Hello World!";
+	print "\n";
 }
 
 main() {
