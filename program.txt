@@ -13,7 +13,6 @@ uberAmazingThing() {
 	Amazing thing #2
 	Amazing thing #3
 	Amazing thing #3
-	Amazing thing #3
 }
 
 main() {
