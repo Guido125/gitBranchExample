@@ -4,8 +4,10 @@
 
 
 sayHi(String strWorld) {
-	print ("Hello %@!!", strWorld);
-	print "\n";
+	for (int t = 0; t < 5; t++) {
+		print ("Hello %@!!", strWorld);
+		print "\n";
+	}
 }
 
 main() {
