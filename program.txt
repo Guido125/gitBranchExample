@@ -1,12 +1,16 @@
-// Version 0.9.2
+// Version 0.10.2
 
 #import things
 
 
+sayHi(String strWorld) {
+	print ("Hello %@!!!", strWorld);
+	print "\n";
+	better bug fix #4
+}
 
 main() {
 	proper bug fix #1
 	bug fix #2
-	print "Hello World!";
+	sayHi(@"World");
 }
-
