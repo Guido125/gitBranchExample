@@ -9,7 +9,7 @@ sayHi(String strWorld) {
 }
 
 main() {
-	bug fix #1
+	proper bug fix #1
 	bug fix #2
 	sayHi(@"World");
 }
