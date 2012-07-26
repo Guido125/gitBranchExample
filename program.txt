@@ -8,8 +8,16 @@ sayHi(String strWorld) {
 	print "\n";
 }
 
+uberAmazingThing() {
+	Amazing thing #1
+	Amazing thing #2
+	Amazing thing #3
+	Amazing thing #3
+}
+
 main() {
 	proper bug fix #1
 	bug fix #2
 	sayHi(@"World");
+	uberAmazingThing();
 }
