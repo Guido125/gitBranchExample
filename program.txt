@@ -1,4 +1,4 @@
-// Version 0.9.1
+// Version 0.10.0
 
 #import things
 
@@ -9,7 +9,7 @@ sayHi(String strWorld) {
 }
 
 main() {
-	bug fix #1
+	proper bug fix #1
 	bug fix #2
 	sayHi(@"World");
 }
