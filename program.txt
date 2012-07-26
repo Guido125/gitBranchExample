@@ -3,7 +3,7 @@
 #import things
 
 sayHi(String strWorld) {
-	print ("Hello %@!!!!", strWorld);
+	print ("Hello %@!!!", strWorld);
 }
 
 main() {
