@@ -9,6 +9,7 @@ sayHi() {
 
 uberAmazingThing() {
 	Amazing thing #1
+	Amazing thing #2
 }
 
 main() {
