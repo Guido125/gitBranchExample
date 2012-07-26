@@ -7,8 +7,13 @@ sayHi() {
 	print "\n";
 }
 
+uberAmazingThing() {
+	Amazing thing #1
+}
+
 main() {
 	bug fix #1
 	sayHi();
+	uberAmazingThing();
 }
 
