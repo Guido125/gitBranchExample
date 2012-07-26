@@ -1,4 +1,4 @@
-// Version 0.9.0
+// Version 0.9.1
 
 #import things
 
@@ -9,6 +9,6 @@ sayHi() {
 
 main() {
 	bug fix #1
+	bug fix #2
 	sayHi();
 }
-
