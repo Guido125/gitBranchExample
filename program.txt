@@ -11,6 +11,9 @@ sayHi(String strWorld) {
 uberAmazingThing() {
 	Amazing thing #1
 	Amazing thing #2
+	Amazing thing #3
+	Amazing thing #3
+	Amazing thing #3
 }
 
 main() {
