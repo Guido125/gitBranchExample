@@ -2,12 +2,12 @@
 
 #import things
 
-sayHi() {
-	print "Hello World!";
+sayHi(String strWorld) {
+	print ("Hello %@!", strWorld);
 }
 
 main() {
 	bug fix #1
-	sayHi();
+	sayHi(@"World");
 }
 
