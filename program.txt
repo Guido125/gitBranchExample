@@ -1,9 +1,10 @@
-// Version 0.9.0
+// Version 0.10.0
 
 #import things
 
-sayHi() {
-	print "Hello World!";
+
+sayHi(String strWorld) {
+	print ("Hello %@!!", strWorld);
 	print "\n";
 }
 
@@ -13,8 +14,8 @@ uberAmazingThing() {
 }
 
 main() {
-	bug fix #1
-	sayHi();
+	proper bug fix #1
+	bug fix #2
+	sayHi(@"World");
 	uberAmazingThing();
 }
-
