@@ -19,6 +19,6 @@ uberAmazingThing() {
 main() {
 	proper bug fix #1
 	bug fix #2
-	sayHi(@"World");
+	sayHi(@"World ");
 	uberAmazingThing();
 }
