@@ -4,13 +4,21 @@
 
 
 sayHi(String strWorld) {
-	print ("Hello %@!!!", strWorld);
+	print ("Hello %@!!!!", strWorld);
 	print "\n";
 	better bug fix #4
+}
+
+uberAmazingThing() {
+	Amazing thing #1
+	Amazing thing #2
+	Amazing thing #3
+	Amazing thing #3
 }
 
 main() {
 	proper bug fix #1
 	bug fix #2
-	sayHi(@"World");
+	sayHi(@"World ");
+	uberAmazingThing();
 }
