@@ -4,7 +4,7 @@
 
 
 sayHi(String strWorld) {
-	print ("Hello %@!!!!", strWorld);
+	print ("Hello %@!!!!!", strWorld);
 	print "\n";
 	better bug fix #4
 }
