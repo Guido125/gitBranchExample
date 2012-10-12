@@ -1,0 +1,264 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww15480\viewh11120\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \ul \ulc0 Problem #1:
+\b0 \ulnone \
+\
+We all know this is terrible, but it happens. The best you can do is reiterate how irresponsible it is to do this and that you refuse to be responsible for issues.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 You should have:
+\b0 \
+* merged the feature to develop\
+* merged to previous release branch and deleted it\
+* branched to released\
+* incremented the version in release then tagged\
+* merged to master, because it's being pushed to prod\
+\
+---\
+\
+go feature branch to develop:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git checkout develop\
+git merge --no-ff feature-xxx-2
+\i0 \
+\
+resolve conflicts (should be intuitive) and and/commit them:\
+
+\i git commit -a
+\i0 \
+\
+Merge and remove previous release branch:\
+
+\i git merge --no-ff release\
+git branch -d release
+\i0 \
+\
+create a release branch:\
+
+\i git checkout -b release
+\i0 \
+\
+change the version number and commit:\
+
+\i git commit -am "Version 0.11.0"
+\i0 \
+\
+Tag:\
+
+\i git tag 0.11.0
+\i0 \
+\
+Merge to master:\
+
+\i git checkout master\
+git merge --no-ff release
+\i0 \
+\
+push changes:\
+
+\i git push origin -u release\
+git push\
+git push --tags
+\i0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \ul \ulc0 Problem #2:
+\b0 \ulnone \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 - You just need to get anything working?
+\b0 \
+\
+Rollback master and upload previous version to prod.\
+\
+---\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git checkout master\
+git reset --hard HEAD^\
+git push origin +master
+\i0 \
+\
+- 
+\b If there's time to do a QA cycle?
+\b0 \
+\
+Apply the fix to the release branch, wait for QA approval, then merge to master.\
+\
+---\
+\
+Apply the fix to release branch:\
+
+\i git checkout release
+\i0 \
+(fix)\
+
+\i git commit -am "Bug #1234 fix" 
+\i0 (should line up with Redmine)\
+\
+Change version and submit to QA:\
+
+\i git commit -am "Version 0.11.1"\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i0 \cf0 Tag:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git tag 0.11.1
+\i0 \
+\
+Merge to master:\
+
+\i git checkout master\
+git merge --no-ff release
+\i0 \
+\
+push changes:
+\i \
+git push\
+git push --tags
+\i0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 - If there is no time for a QA cycle (critical bug) but the bug has an easy fix?\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b0 \cf0 Standard hotfix.\
+\
+---\
+\
+Apply the fix to hotfix branch:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git checkout master\
+git checkout -b hotfix
+\i0 \
+(fix)\
+
+\i git commit -am "Bug #1234 fix" 
+\i0 (should line up with Redmine)\
+\
+Change version and tag:\
+
+\i git commit -am "Version 0.11.1"
+\i0 \
+
+\i git tag 0.11.1
+\i0 \
+\
+Merge to master and release:\
+
+\i git checkout master\
+git merge --no-ff hotfix\
+git checkout release\
+git merge --no-ff hotfix
+\i0 \
+\
+Delete hot fix branch:\
+
+\i git branch -d hotfix
+\i0 \
+\
+push changes:
+\i \
+git push\
+git push --tags
+\i0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 - If the bug fix takes awhile?
+\b0 \
+\
+In this case, the feature needs to be removed from the release branch and it should come be merged into the next release branch. You should revert the merge and merge this change into develop, then submit a new build.\
+\
+---\
+\
+Go to release:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git checkout release\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i0 \cf0 \
+Revert the change:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git revert 1cadb1b 
+\i0 (note: this is the hash of the feature merge commit)\
+\
+Change version and tag:\
+
+\i git commit -am "Version 0.11.1"
+\i0 \
+
+\i git tag 0.11.1
+\i0 \
+\
+Merge changes to develop:\
+
+\i git checkout develop\
+git merge --no-ff release
+\i0 \
+\
+push changes:
+\i \
+git push\
+git push --tags\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\b \cf0 \ul \ulc0 Problem #3:
+\b0 \ulnone \
+\
+The feature needs to be reverted on the dev branch. You need to merge this to the feature branch, and then revert the revert. If this step is missed, you will only merge the changes to the feature into dev on next merge instead of the entire feature.\
+\
+Go to develop:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git checkout develop\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i0 \cf0 \
+Revert the change:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\i \cf0 git revert 1cadb1b 
+\i0 (hold onto the hash of this commit)\
+\
+Merge into the recreated feature branch:\
+
+\i git checkout 1cadb1b\
+git checkout -b feature-uberAmazingBranch\
+git merge --no-ff develop
+\i0 \
+\
+Revert the revert\
+
+\i git revert <hashcode>
+\i0  (the hash code of the first revert)\
+\
+push changes:\
+
+\i git push -u origin feature-uberAmazingThing\
+git push
+\i0 \
+\
+}
